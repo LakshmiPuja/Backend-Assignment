@@ -1,6 +1,7 @@
 package com.example.demo.serviceImpl;
 
 import com.example.demo.entity.User;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findByUserName(String name){
-        return repository.findByUserName(name);
+
+        User user = repository.findByUserName(name);
+        if (user != null) return user;
+        else throw  new UserNotFoundException("User Not found");
     }
 
 
