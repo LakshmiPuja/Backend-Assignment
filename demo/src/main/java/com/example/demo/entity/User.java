@@ -11,19 +11,20 @@ import java.util.List;
 @Data
 @Entity
 @Table(name="user")
-public class User implements UserDetails {
+public class User {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userId;
+    private int id;
     private String userName;
     private String password;
     private String role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Wishlist> wishlistItems;
 
+    /*
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new GrantedAuthority() {
@@ -62,7 +63,7 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
-    }
+    }*/
 
 }
 

@@ -20,7 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.inMemoryAuthentication().withUser("Puja").password(this.passwordEncoder().encode("Puja@1234")).roles("NORMAL");
+        auth.inMemoryAuthentication().withUser("Kasli").password(this.passwordEncoder().encode("Kasli@1234")).roles("ADMIN");
+       // auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
@@ -30,8 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/api/users/signup").permitAll()
+        http .csrf().disable()
+                .authorizeRequests()
+                .antMatchers().permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()

@@ -17,7 +17,7 @@ public class WishlistServiceImpl implements WishlistService {
 
     @Override
     public List<Wishlist> findAllByUserId(int userId){
-        return wishlistRepository.findAllByUser_UserId(userId)
+        return wishlistRepository.findAllByUserId(userId)
                 .orElseThrow(() -> new WishlistNotFound("wishlistItems not found"));
 
     }
